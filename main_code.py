@@ -44,7 +44,7 @@ main_dataframe = pd.DataFrame(columns=dataframe_columns)
 for i in range(len(strategy)):
   print('----------------------------')
   print(f'strategy_{i+1}')
-  new_table = Table(100, 8, 2500000, 10, strategy[i])
+  new_table = Table(1000000, 8, 2500000, 10, strategy[i])
   new_table.play_games()
   new_table.print_table_stats()
   data_frame = new_table.make_dataframe()
