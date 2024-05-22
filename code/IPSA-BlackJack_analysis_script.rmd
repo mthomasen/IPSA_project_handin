@@ -1,0 +1,46 @@
+---
+title: "IPSA - BlackJack_analysis"
+author: "202104577_Katrine_O_Frendorf,
+202105178_Louie_M_Hessellund,
+202107872_Manuela_S_Thomasen"
+date: "2024-05-22"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(lme4, tidyverse)
+```
+
+
+
+```{r}
+setwd('.')
+
+#import data
+# Load in .csv logfiles, into one dataframe
+temp = list.files(path = "logfiles/.", full.names = T, pattern="*.csv")
+# Load them all in
+df <- map_dfr(temp, read_csv)
+```
+
+```{r}
+ggplot(df, aes(x = games_played, y = wealth, color = strategy)) +
+  geom_line() +
+  labs(title = "Wealth Development Over Games Played",
+       x = "Games Played",
+       y = "Wealth",
+       color = "Strategy") +
+  theme_minimal()
+```
+
+
+```{r}
+black_jack_lm_model <- lm(wealth ~ games_played * strategy, data = df)
+
+summary(black_jack_lm_model)
+```
+
+
