@@ -69,17 +69,21 @@ def strategy_4(cards, card_sum, dealer_cards):
 
   >>> strategy_4(['5','K'], 15, ['5','8'])
   1
+
+  >>> strategy_4(['A','7'], 18, ['5','8'])
+  1
   '''
   if card_sum < 17:
     return 1
-  elif card_sum < 20 and card_sum >= 17:
-    for i in range(len(cards)):
-      if cards[i] == 'A':
-        return 1
-      else:
-        return 0
-  else:
-    return 0
+  elif card_sum >= 17:
+    if card_sum < 20:
+      for i in range(len(cards)):
+        if cards[i] == 'A':
+          return 1
+    else:
+      return 0
+  return 0
+
 
 
 def strategy_5(cards, card_sum, dealer_cards):

@@ -38,22 +38,22 @@ class Table:
     sum of all the wealth after each game.
 
     doctest:
-    >>> Table1 = Table(1, 8, 1000, 416, strategy_1)
-    >>> Table1.game.game_ending = -1
-    >>> Table1.update_wealth()
-    >>> print(Table1.player_wealth)
+    >>> table1 = Table(1, 8, 1000, 416, strategy_1)
+    >>> table1.game.game_ending = -1
+    >>> table1.update_wealth()
+    >>> print(table1.player_wealth)
     584
 
-    >>> Table2 = Table(1, 8, 584, 113, strategy_1)
-    >>> Table2.game.game_ending = 1
-    >>> Table2.update_wealth()
-    >>> print(Table2.player_wealth)
+    >>> table2 = Table(1, 8, 584, 113, strategy_1)
+    >>> table2.game.game_ending = 1
+    >>> table2.update_wealth()
+    >>> print(table2.player_wealth)
     697
 
-    >>> Table3 = Table(1, 8, 349, 113, strategy_1)
-    >>> Table3.game.game_ending = 0
-    >>> Table3.update_wealth()
-    >>> print(Table3.player_wealth)
+    >>> table3 = Table(1, 8, 349, 113, strategy_1)
+    >>> table3.game.game_ending = 0
+    >>> table3.update_wealth()
+    >>> print(table3.player_wealth)
     349
     '''
     self.player_wealth += (self.game.player_bet * self.game.game_ending)
@@ -63,34 +63,34 @@ class Table:
     how many times the player has won, lost, or tied.
 
     doctest:
-    >>> Table1 = Table(1, 8, 349, 113, strategy_1)
-    >>> Table1.game.game_ending = 1
-    >>> Table1.who_won()
-    >>> print(Table1.player_won)
+    >>> table1 = Table(1, 8, 349, 113, strategy_1)
+    >>> table1.game.game_ending = 1
+    >>> table1.who_won()
+    >>> print(table1.player_won)
     1
-    >>> print(Table1.dealer_won)
+    >>> print(table1.dealer_won)
     0
-    >>> print(Table1.player_blackjack)
+    >>> print(table1.player_blackjack)
     0
 
-    >>> Table2 = Table(1, 8, 349, 113, strategy_1)
-    >>> Table2.game.game_ending = 1.5
-    >>> Table2.who_won()
-    >>> print(Table2.player_won)
+    >>> table2 = Table(1, 8, 349, 113, strategy_1)
+    >>> table2.game.game_ending = 1.5
+    >>> table2.who_won()
+    >>> print(table2.player_won)
     0
-    >>> print(Table2.dealer_won)
+    >>> print(table2.dealer_won)
     0
-    >>> print(Table2.player_blackjack)
+    >>> print(table2.player_blackjack)
     1
 
-    >>> Table3 = Table(1, 8, 349, 113, strategy_1)
-    >>> Table3.game.game_ending = 0
-    >>> Table3.who_won()
-    >>> print(Table3.dealer_won)
+    >>> table3 = Table(1, 8, 349, 113, strategy_1)
+    >>> table3.game.game_ending = 0
+    >>> table3.who_won()
+    >>> print(table3.dealer_won)
     0
-    >>> print(Table3.player_blackjack)
+    >>> print(table3.player_blackjack)
     0
-    >>> print(Table3.tied)
+    >>> print(table3.tied)
     1
     '''
     if self.game.game_ending == 1:
@@ -107,10 +107,10 @@ class Table:
     statistiscs of the wealth, bet, and number of games played.
 
     doctest:
-    >>> Table1 = Table(1, 8, 300, 100, strategy_1)
-    >>> Table1.game.game_ending = 1
-    >>> Table1.table_statistics()
-    >>> print(Table1.wealth_stats)
+    >>> table1 = Table(1, 8, 300, 100, strategy_1)
+    >>> table1.game.game_ending = 1
+    >>> table1.table_statistics()
+    >>> print(table1.wealth_stats)
     [300, 300]
     '''
     self.wealth_stats.append(self.player_wealth)
@@ -123,15 +123,15 @@ class Table:
     and update the wealth after each game.
 
     doctest:
-    >>> Table1 = Table(4, 8, 1000,  100, strategy_1)
-    >>> Table1.play_games()
-    >>> print(Table1.games_played)
+    >>> table1 = Table(4, 8, 1000,  100, strategy_1)
+    >>> table1.play_games()
+    >>> print(table1.games_played)
     4
 
 
-    >>> Table2 = Table(12, 8, 1000, 100, strategy_1)
-    >>> Table2.play_games()
-    >>> print(Table2.games_played)
+    >>> table2 = Table(12, 8, 1000, 100, strategy_1)
+    >>> table2.play_games()
+    >>> print(table2.games_played)
     12
 
     '''
@@ -148,12 +148,12 @@ class Table:
   def print_table_stats(self):
     '''
     Doctest:
-    >>> Table1 = Table(12, 8, 3564, 100, strategy_1)
-    >>> Table1.player_won = 6
-    >>> Table1.dealer_won = 4
-    >>> Table1.tied = 1
-    >>> Table1.player_blackjack = 1
-    >>> Table1.print_table_stats()
+    >>> table1 = Table(12, 8, 3564, 100, strategy_1)
+    >>> table1.player_won = 6
+    >>> table1.dealer_won = 4
+    >>> table1.tied = 1
+    >>> table1.player_blackjack = 1
+    >>> table1.print_table_stats()
     You got black Jack 1 times
     The player won 6 times
     You tied 1 times

@@ -24,16 +24,16 @@ class Game:
     so it can be used for the startegies and figuring out who won
 
     Doctest:
-    >>> Game1 = Game(8, 100, strategy_1)
-    >>> Game1.calculate_sum(['Q','2'])
+    >>> game1 = Game(8, 100, strategy_1)
+    >>> game1.calculate_sum(['Q','2'])
     12
 
-    >>> Game2 = Game(8, 100, strategy_2)
-    >>> Game2.calculate_sum(['A','10'])
+    >>> game2 = Game(8, 100, strategy_2)
+    >>> game2.calculate_sum(['A','10'])
     21
 
-    >>> Game3 = Game(8, 100, strategy_5)
-    >>> Game3.calculate_sum(['8','8','A'])
+    >>> game3 = Game(8, 100, strategy_5)
+    >>> game3.calculate_sum(['8','8','A'])
     17
     '''
     card_sum = 0
@@ -54,16 +54,16 @@ class Game:
     '''Creates a new deck, deals the cards, and calculates the sums of the 
     cards
     doctest:
-    >>> Game1 = Game (8, 100, strategy_4)
-    >>> Game1.start()
-    >>> len(Game1.player_cards)
+    >>> game1 = Game (8, 100, strategy_4)
+    >>> game1.start()
+    >>> len(game1.player_cards)
     2
-    >>> len(Game1.dealer_cards) 
+    >>> len(game1.dealer_cards) 
     2
-    >>> len(Game1.game_card_deck.cards)
+    >>> len(game1.game_card_deck.cards)
     412
     '''
-    self.game_card_deck = card_deck(self.number_of_decks)
+    self.game_card_deck = CardDeck(self.number_of_decks)
     self.game_card_deck.create_deck()
 
     self.player_cards = self.game_card_deck.cards[0:2]
@@ -79,25 +79,28 @@ class Game:
     '''This function is the player's move, it will keep drawing cards 
     and making choices based on strategies
     Doctest:
-    >>> Game1 = Game(8, 100, strategy_1)
-    >>> Game1.start()
-    >>> Game1.player_cards = ['8','8']
-    >>> Game1.player_move()
-    >>> print(Game1.player_done)
+    >>> game1 = Game(8, 100, strategy_1)
+    >>> game1.start()
+    >>> game1.player_cards = ['8','8']
+    >>> game1.player_sum = 16
+    >>> game1.player_move()
+    >>> print(game1.player_done)
     yes
 
-    >>> Game2 = Game(8, 100, strategy_4)
-    >>> Game2.start()
-    >>> Game2.player_cards = ['A','7']
-    >>> Game2.player_move()
-    >>> len(Game2.player_cards)
-    3
+    >>> game2 = Game(8, 100, strategy_4)
+    >>> game2.start()
+    >>> game2.player_cards = ['A','10']
+    >>> game2.player_sum = 21
+    >>> game2.player_move()
+    >>> len(game2.player_cards)
+    2
 
-    >>> Game3 = Game(8, 100, strategy_2)
-    >>> Game3.start()
-    >>> Game3.player_cards = ['9','K']
-    >>> Game3.player_move()
-    >>> len(Game3.player_cards)
+    >>> game3 = Game(8, 100, strategy_2)
+    >>> game3.start()
+    >>> game3.player_cards = ['9','K']
+    >>> game3.player_sum = 19
+    >>> game3.player_move()
+    >>> len(game3.player_cards)
     2
     '''
     while self.player_done == 'no':
@@ -118,29 +121,29 @@ class Game:
     until it reaches 17 or higher.
 
     doctest:
-    >>> Game1 = Game(8, 100, strategy_1)
-    >>> Game1.start()
-    >>> Game1.dealer_cards = ['10','8'] 
-    >>> Game1.dealer_move()
-    >>> len(Game1.dealer_cards)
+    >>> game1 = Game(8, 100, strategy_1)
+    >>> game1.start()
+    >>> game1.dealer_cards = ['10','8'] 
+    >>> game1.dealer_move()
+    >>> len(game1.dealer_cards)
     2
 
-    >>> Game2 = Game(8, 100, strategy_5)
-    >>> Game2.start()
-    >>> Game2.dealer_cards = ['5','4','8']
-    >>> Game2.player_cards = ['J','8']
-    >>> Game2.dealer_move()
-    >>> len(Game2.dealer_cards)
+    >>> game2 = Game(8, 100, strategy_5)
+    >>> game2.start()
+    >>> game2.dealer_cards = ['5','4','8']
+    >>> game2.player_cards = ['J','8']
+    >>> game2.dealer_move()
+    >>> len(game2.dealer_cards)
     3
-    >>> len(Game2.player_cards)
+    >>> len(game2.player_cards)
     2
 
 
-    >>> Game3 = Game(8, 100, strategy_5)
-    >>> Game3.start()
-    >>> Game3.dealer_cards = ['J','6']
-    >>> Game3.dealer_move()
-    >>> len(Game3.dealer_cards)
+    >>> game3 = Game(8, 100, strategy_5)
+    >>> game3.start()
+    >>> game3.dealer_cards = ['J','6']
+    >>> game3.dealer_move()
+    >>> len(game3.dealer_cards)
     3
     '''
     self.dealer_sum = self.calculate_sum(self.dealer_cards)
@@ -157,42 +160,42 @@ class Game:
 
 
     doctest: 
-    >>> Game1 = Game(8, 100, strategy_2)
-    >>> Game1.start()
-    >>> Game1.player_sum = 18 
-    >>> Game1.dealer_sum = 17
-    >>> Game1.player_done = 'yes'
-    >>> Game1.end_game()
-    >>> print(Game1.game_ending)
+    >>> game1 = Game(8, 100, strategy_2)
+    >>> game1.start()
+    >>> game1.player_sum = 18 
+    >>> game1.dealer_sum = 17
+    >>> game1.player_done = 'yes'
+    >>> game1.end_game()
+    >>> print(game1.game_ending)
     1
 
-    >>> Game2 = Game(8, 100, strategy_2)
-    >>> Game2.start()
-    >>> Game2.player_sum = 19
-    >>> Game2.dealer_sum = 19
-    >>> Game2.player_done = 'yes'
-    >>> Game2.end_game()
-    >>> print(Game2.game_ending)
+    >>> game2 = Game(8, 100, strategy_2)
+    >>> game2.start()
+    >>> game2.player_sum = 19
+    >>> game2.dealer_sum = 19
+    >>> game2.player_done = 'yes'
+    >>> game2.end_game()
+    >>> print(game2.game_ending)
     0
 
 
-    >>> Game3 = Game(8, 100, strategy_2)
-    >>> Game3.start()
-    >>> Game3.player_sum = 24
-    >>> Game3.dealer_sum = 19
-    >>> Game3.player_done = 'yes'
-    >>> Game3.end_game()
-    >>> print(Game3.game_ending) 
+    >>> game3 = Game(8, 100, strategy_2)
+    >>> game3.start()
+    >>> game3.player_sum = 24
+    >>> game3.dealer_sum = 19
+    >>> game3.player_done = 'yes'
+    >>> game3.end_game()
+    >>> print(game3.game_ending) 
     -1
 
-    >>> Game4 = Game(8, 100, strategy_2)
-    >>> Game4.player_cards = ['10','A']
-    >>> Game4.dealer_cards = ['10','9']
-    >>> Game4.player_sum = 21
-    >>> Game4.dealer_sum = 19
-    >>> Game4.player_done = 'yes'
-    >>> Game4.end_game()
-    >>> print(Game4.game_ending) 
+    >>> game4 = Game(8, 100, strategy_2)
+    >>> game4.player_cards = ['10','A']
+    >>> game4.dealer_cards = ['10','9']
+    >>> game4.player_sum = 21
+    >>> game4.dealer_sum = 19
+    >>> game4.player_done = 'yes'
+    >>> game4.end_game()
+    >>> print(game4.game_ending) 
     1.5
 
     '''
@@ -214,3 +217,8 @@ class Game:
           self.game_ending = 1
       else:
         self.game_ending = -1
+
+
+if __name__ == '__main__':
+  import doctest
+  doctest.testmod(verbose=True)

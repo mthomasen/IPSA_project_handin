@@ -1,7 +1,7 @@
 import random
 
 
-class card_deck:
+class CardDeck:
 
   
   def __init__(self, number_of_decks):
@@ -15,11 +15,11 @@ class card_deck:
     This list is then repeated the indicated number of decks times
 
     doctest:
-    >>> deck = card_deck(8)
+    >>> deck = CardDeck(8)
     >>> len(deck.create_deck())
     416
 
-    >>> deck2 = card_deck(3)
+    >>> deck2 = CardDeck(3)
     >>> len(deck2.create_deck())
     156
     '''
@@ -39,3 +39,8 @@ class card_deck:
   
   def draw_card(self):
     self.cards.pop(0)
+
+
+if __name__ == '__main__':
+  import doctest
+  doctest.testmod(verbose=True)
