@@ -1,6 +1,6 @@
-from Game_class import *
-
 import matplotlib.pyplot as plt
+
+from Game_class import *
 
 import os
 
@@ -184,7 +184,7 @@ class Table:
     plt.close()
     return filename
 
-  def make_save_dataframe(self):
+  def make_dataframe(self):
 
     self.dataframe = pd.DataFrame({
         'strategy': self.strategy_name,
@@ -194,15 +194,20 @@ class Table:
         'player_bet': self.stats_bet
     })
 
+    return self.dataframe
+
+
+  def save_dataframe(self):
     time_stamp = datetime.now(pytz.timezone('Europe/Copenhagen'))
 
     if not os.path.exists('logfiles'):
       os.makedirs('logfiles')
-    
-    logfile_name = 'logfiles/logfile_{}_{}_{}_{}.csv'.format(self.strategy_name, time_stamp.hour,\
-                time_stamp.minute, time_stamp.second)
-    
+
+    logfile_name = 'logfiles/logfile_{}_{}_{}_{}.csv'.format(
+      self.strategy_name,time_stamp.hour, time_stamp.minute, time_stamp.second)
+
     self.dataframe.to_csv(logfile_name)
+    
 
 
 if __name__ == '__main__':

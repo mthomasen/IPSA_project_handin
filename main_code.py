@@ -8,8 +8,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
-os.chdir("D:\AU_Cog_Sci\matematik_tilvalg\intro_prog\exam_project\IPSA_project")
+#Change to your own path 
+os.chdir("D:\AU_Cog_Sci\matematik_tilvalg\intro_prog\exam_project\IPSA_project_handin")
 
 
 def save_main_plot(data, x_axis, y_axis, filter, folder):
@@ -35,16 +35,22 @@ folder = f'plots_{time_stamp.day}_{time_stamp.month}'
 plot_files = []
 
 
+dataframe_columns = [
+    'strategy', 'wealth', 'game_ending', 'games_played', 'player_bet'
+]
+
+main_dataframe = pd.DataFrame(columns=dataframe_columns)
+
 for i in range(len(strategy)):
   print('----------------------------')
   print(f'strategy_{i+1}')
-  new_table = Table(400000, 8, 500000, 10, strategy[i])
+  new_table = Table(1000000, 8, 2500000, 10, strategy[i])
   new_table.play_games()
   new_table.print_table_stats()
   data_frame = new_table.make_dataframe()
+  new_table.save_dataframe()
   main_dataframe = pd.concat([main_dataframe, data_frame])
   plot_file = new_table.plot_table_stats(folder)
   plot_files.append(plot_file)
 
 save_main_plot(main_dataframe, 'games_played', 'wealth', 'strategy', folder)
-
